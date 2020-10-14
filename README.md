@@ -1,4 +1,8 @@
-# face_detection
+# Face Detection Exercise
 
-using different models for face detection
-do these models work on anime faces? what about faces with sunglasses?
+Learning to use different pre-built models for face detection in Python.
+
+## Research Questions
+
+- Do these face detection models work on anime faces?
+- Do they work when a person is wearing sunglasses?
