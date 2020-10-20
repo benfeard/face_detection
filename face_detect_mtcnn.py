@@ -7,6 +7,9 @@ Created on Sun Oct 11 20:37:39 2020
 
 source:
 https://machinelearningmastery.com/how-to-perform-face-detection-with-classical-and-deep-learning-methods-in-python-with-keras/
+
+
+usage: python face_detect_mtcnn.py test1.jpg
 """
 
 # Now use a Multi-Task Cascaded Convolutional Neural Network or MTCNN
@@ -56,19 +59,27 @@ def draw_faces(filename, result_list):
 		pyplot.imshow(data[y1:y2, x1:x2])
 	# show the plot
 	pyplot.show()
-
-
+   
+# count each face found 
+def count_faces(result_list):
+    num_faces = len(result_list)
+    print("I found %d faces in the photo" %(num_faces))
+    
 # load image from file
 #filename = 'test1.jpg'
 #filename = 'test2.jpg'
 #filename = 'headshot.jpg'
 #filename = 'anime_faces.jpg'
-filename = 'sunglasses.jpeg'
+#filename = 'sunglasses.jpeg'
+filename = sys.argv[-1]
 pixels = pyplot.imread(filename)
 # create the detector, using default weights
 detector = MTCNN()
 # detect faces in the image
 faces = detector.detect_faces(pixels)
+
+# number of faces found
+count_faces(faces)
 
 # draw on the original images
 #draw_image_with_boxes(filename, faces)
