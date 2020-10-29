@@ -19,6 +19,7 @@ from matplotlib import pyplot
 from matplotlib.patches import Rectangle
 from matplotlib.patches import Circle
 from mtcnn.mtcnn import MTCNN
+import sys
 
 def draw_image_with_boxes(filename, result_list):
     # load the image
@@ -64,6 +65,19 @@ def draw_faces(filename, result_list):
 def count_faces(result_list):
     num_faces = len(result_list)
     print("I found %d faces in the photo" %(num_faces))
+    return num_faces
+    
+# find the faces
+def detect_faces(image_name):
+    pixels = pyplot.imread(image_name)
+    # create the detector, using default weights
+    detector = MTCNN()
+    
+    # detect faces in the image
+    faces = detector.detect_faces(pixels)
+    
+    # return result list
+    return faces
     
 # load image from file
 #filename = 'test1.jpg'
@@ -72,11 +86,9 @@ def count_faces(result_list):
 #filename = 'anime_faces.jpg'
 #filename = 'sunglasses.jpeg'
 filename = sys.argv[-1]
-pixels = pyplot.imread(filename)
-# create the detector, using default weights
-detector = MTCNN()
-# detect faces in the image
-faces = detector.detect_faces(pixels)
+
+# find the faces
+faces = detect_faces(filename)
 
 # number of faces found
 count_faces(faces)
